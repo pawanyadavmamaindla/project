@@ -21,7 +21,7 @@ const Home  = ()=>{
               method:"put",
               headers:{
                   "Content-Type":"application/json",
-                  "Authorization":"Bearer"+localStorage.getItem("jwt")
+                  "Authorization":"Bearer "+localStorage.getItem("jwt")
               },
               body:JSON.stringify({
                 postId:id
@@ -114,8 +114,8 @@ const Home  = ()=>{
            {
                data?.map(item=>{
                    return(
-                       <div className="card home-card" key={item._id}>
-                            <h5 style={{padding:"5px"}}><Link to={item.postedBy?._id !== state._id?"/profile/"+item.postedBy?._id :"/profile"  }>{item.postedBy?.name}</Link> {item.postedBy?._id == state._id 
+                       <div className="card home-card" key={item?._id}>
+                            <h5 style={{padding:"5px"}}><Link to={item.postedBy?._id !== state._id?"/profile/"+item.postedBy?._id :"/profile"  }>{item.postedBy?.name}</Link> {item.postedBy?._id == state?._id 
                             && <i className="material-icons" style={{
                                 float:"right"
                             }} 

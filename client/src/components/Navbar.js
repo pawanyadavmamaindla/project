@@ -1,5 +1,5 @@
 import React,{useContext,useRef,useEffect,useState} from 'react'
-import {Link ,useN, useNavigate} from 'react-router-dom'
+import {Link ,user, useNavigate} from 'react-router-dom'
 import {UserContext} from '../App'
 import M from 'materialize-css'
 const NavBar = ()=>{
@@ -23,7 +23,7 @@ const NavBar = ()=>{
             onClick={()=>{
               localStorage.clear()
               dispatch({type:"CLEAR"})
-              navigate.call('/signin')
+              navigate('/signin')
             }}
             >
                 Logout
@@ -72,14 +72,15 @@ const NavBar = ()=>{
             type="text"
             placeholder="search users"
             value={search}
-            onChange={(e)=>fetchUsers(e.target.value)}
+            onChange={(e)=>
+              fetchUsers(e.target.value)}
             />
              <ul className="collection">
                {userDetails.map(item=>{
-                 return <Link to={item._id !== state._id ? "/profile/"+item._id:'/profile'} onClick={()=>{
+                 return <Link to={item?._id !== state?._id ?"/profile/"+item?._id:'/profile'} onClick={()=>{
                    M.Modal.getInstance(searchModal.current).close()
                    setSearch('')
-                 }}><li className="collection-item">{item.email}</li></Link> 
+                 }}><li className="collection-item">{item?.email}</li></Link> 
                })}
                
               </ul>
