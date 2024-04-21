@@ -10,21 +10,20 @@ import CreatePost from './components/screens/CreatePost'
 import {reducer,initialState} from './reducers/userReducer'
 import UserProfile from './components/screens/UserProfile'
 import SubscribedUserPosts from './components/screens/SubscribesUserPosts'
-import Reset from './components/screens/Reset'
-import NewPassword from './components/screens/Newpassword'
+
 export const UserContext = createContext()
 
 
 const Routing = ()=>{
   const navigate = useNavigate()
-  const {state,dispatch} = useContext(UserContext)
+  const {dispatch} = useContext(UserContext)
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("user"))
     if(user){
       dispatch({type:"USER",payload:user})
     }else{
-      if(!navigate.call('/reset'))
-           navigate.call('/signin')
+      if(!navigate('/reset'))
+           navigate('/signin')
     }
   },[])
   return(
@@ -48,12 +47,6 @@ const Routing = ()=>{
         
       </Route>
       <Route path="/myfollowingpost" element={<SubscribedUserPosts />}>
-        
-      </Route>
-      <Route exact path="/reset" element={<Reset/>}>
-        
-      </Route>
-      <Route path="/reset/:token" element={<NewPassword />}>
         
       </Route>
       
